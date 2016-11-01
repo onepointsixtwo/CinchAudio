@@ -21,9 +21,12 @@
 		EA15A3781DC5057B0054262D /* CinchAudioFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15A3771DC505600054262D /* CinchAudioFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA15A37C1DC523B60054262D /* NSString+OSStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15A37A1DC523B60054262D /* NSString+OSStatus.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		EA15A37D1DC523B60054262D /* NSString+OSStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = EA15A37B1DC523B60054262D /* NSString+OSStatus.m */; };
-		EAE8D5321DC79E2C003F241F /* CinchAudio.podspec in Resources */ = {isa = PBXBuildFile; fileRef = EAE8D52F1DC79E2C003F241F /* CinchAudio.podspec */; };
-		EAE8D5331DC79E2C003F241F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EAE8D5301DC79E2C003F241F /* LICENSE */; };
-		EAE8D5341DC79E2C003F241F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = EAE8D5311DC79E2C003F241F /* README.md */; };
+		EAE8D5381DC8BAB3003F241F /* NSData+PCM.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE8D5361DC8BAB3003F241F /* NSData+PCM.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAE8D5391DC8BAB3003F241F /* NSData+PCM.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE8D5371DC8BAB3003F241F /* NSData+PCM.m */; };
+		EAE8D53C1DC8BAC3003F241F /* NSMutableData+PCM.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE8D53A1DC8BAC3003F241F /* NSMutableData+PCM.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAE8D53D1DC8BAC3003F241F /* NSMutableData+PCM.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE8D53B1DC8BAC3003F241F /* NSMutableData+PCM.m */; };
+		EAE8D5411DC8C84F003F241F /* CinchAudioBase.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE8D53F1DC8C84F003F241F /* CinchAudioBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAE8D5421DC8C84F003F241F /* CinchAudioBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE8D5401DC8C84F003F241F /* CinchAudioBase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,12 @@
 		EAE8D52F1DC79E2C003F241F /* CinchAudio.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CinchAudio.podspec; path = ../../CinchAudio.podspec; sourceTree = "<group>"; };
 		EAE8D5301DC79E2C003F241F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
 		EAE8D5311DC79E2C003F241F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		EAE8D5361DC8BAB3003F241F /* NSData+PCM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+PCM.h"; sourceTree = "<group>"; };
+		EAE8D5371DC8BAB3003F241F /* NSData+PCM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+PCM.m"; sourceTree = "<group>"; };
+		EAE8D53A1DC8BAC3003F241F /* NSMutableData+PCM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+PCM.h"; sourceTree = "<group>"; };
+		EAE8D53B1DC8BAC3003F241F /* NSMutableData+PCM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+PCM.m"; sourceTree = "<group>"; };
+		EAE8D53F1DC8C84F003F241F /* CinchAudioBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinchAudioBase.h; sourceTree = "<group>"; };
+		EAE8D5401DC8C84F003F241F /* CinchAudioBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinchAudioBase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +165,10 @@
 			children = (
 				EA15A37A1DC523B60054262D /* NSString+OSStatus.h */,
 				EA15A37B1DC523B60054262D /* NSString+OSStatus.m */,
+				EAE8D5361DC8BAB3003F241F /* NSData+PCM.h */,
+				EAE8D5371DC8BAB3003F241F /* NSData+PCM.m */,
+				EAE8D53A1DC8BAC3003F241F /* NSMutableData+PCM.h */,
+				EAE8D53B1DC8BAC3003F241F /* NSMutableData+PCM.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -163,6 +176,7 @@
 		EAE8D5261DC79D11003F241F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EAE8D53E1DC8C83A003F241F /* Base class */,
 				EA15A3791DC523960054262D /* Categories */,
 				EA15A3761DC504CB0054262D /* Protocols */,
 				EA15A35B1DC3EB9E0054262D /* Recorder */,
@@ -181,6 +195,15 @@
 			name = "Pod metadata";
 			sourceTree = "<group>";
 		};
+		EAE8D53E1DC8C83A003F241F /* Base class */ = {
+			isa = PBXGroup;
+			children = (
+				EAE8D53F1DC8C84F003F241F /* CinchAudioBase.h */,
+				EAE8D5401DC8C84F003F241F /* CinchAudioBase.m */,
+			);
+			name = "Base class";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -190,8 +213,11 @@
 			files = (
 				EA15A35F1DC3EBBF0054262D /* CinchAudioPlayer.h in Headers */,
 				EA15A3641DC3EBCF0054262D /* CinchAudioRecorder.h in Headers */,
+				EAE8D53C1DC8BAC3003F241F /* NSMutableData+PCM.h in Headers */,
 				EA15A3751DC504980054262D /* CinchAudioDataSource.h in Headers */,
+				EAE8D5381DC8BAB3003F241F /* NSData+PCM.h in Headers */,
 				EA15A3481DC3EB500054262D /* CinchAudio.h in Headers */,
+				EAE8D5411DC8C84F003F241F /* CinchAudioBase.h in Headers */,
 				EA15A37C1DC523B60054262D /* NSString+OSStatus.h in Headers */,
 				EA15A3781DC5057B0054262D /* CinchAudioFormat.h in Headers */,
 			);
@@ -280,8 +306,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAE8D5331DC79E2C003F241F /* LICENSE in Resources */,
-				EAE8D5321DC79E2C003F241F /* CinchAudio.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,9 +323,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE8D5391DC8BAB3003F241F /* NSData+PCM.m in Sources */,
 				EA15A3651DC3EBCF0054262D /* CinchAudioRecorder.m in Sources */,
 				EA15A37D1DC523B60054262D /* NSString+OSStatus.m in Sources */,
-				EAE8D5341DC79E2C003F241F /* README.md in Sources */,
+				EAE8D5421DC8C84F003F241F /* CinchAudioBase.m in Sources */,
+				EAE8D53D1DC8BAC3003F241F /* NSMutableData+PCM.m in Sources */,
 				EA15A3601DC3EBBF0054262D /* CinchAudioPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CinchAudioDataSource.h"
 #import "CinchAudioFormat.h"
+#import "CinchAudioBase.h"
 @class CinchAudioPlayer;
 @import AVFoundation;
 @import AudioToolbox;
@@ -21,13 +22,11 @@
 @end
 
 
-@interface CinchAudioPlayer : NSObject
+@interface CinchAudioPlayer : CinchAudioBase
 
 @property (nonatomic, readonly) NSTimeInterval totalPlaybackTime;
-@property (nonatomic, readonly) AudioStreamBasicDescription audioStreamDescription;
 @property (nonatomic, readonly) BOOL playing;
 @property (nonatomic, strong, readonly) _Nonnull id<CinchAudioDataSource> dataSource;
-@property (nonatomic, strong, readonly) _Nonnull id<CinchAudioFormat> audioFormat;
 @property (nonatomic, weak) _Nullable id<CinchAudioPlayerDelegate> delegate;
 
 -(nonnull instancetype)init NS_UNAVAILABLE;

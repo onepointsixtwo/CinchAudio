@@ -17,11 +17,11 @@
     NSTimer* endingTimer;
 }
 
-@property (strong, nonatomic, readonly) NSMutableArray* buffers;
-
 @end
 
 @implementation CinchAudioPlayer
+
+@synthesize audioFormat = _audioFormat;
 
 #pragma mark - Initialiser
 -(instancetype)initWithDataSource:(id<CinchAudioDataSource>)dataSource audioFormat:(id<CinchAudioFormat>)audioFormat {
@@ -30,12 +30,10 @@
         _audioFormat = audioFormat;
         
         if([self.audioFormat audioFormatType] == CinchAudioFormatType16BitShort) {
-            NSAssert([self.dataSource respondsToSelector:@selector(int16AudioSamplesWithLength:offsetInSamples:samples:)], @"If using 16 bit short audio format, the data source must implement the int16AudioSamplesWithLength:offsetInSamples:samples: method");
+            NSAssert([self.dataSource respondsToSelector:@selector(int16AudioSamplesWithLength:offsetInSamples:)], @"If using 16 bit short audio format, the data source must implement the int16AudioSamplesWithLength:offsetInSamples:samples: method");
         } else if([self.audioFormat audioFormatType] == CinchAudioFormatType32BitFloat) {
-            NSAssert([self.dataSource respondsToSelector:@selector(floatAudioSamplesWithLength:offsetInSamples:samples:)], @"If using float audio format, the data source must implement the floatAudioSamplesWithLength:offsetInSamples:samples: method");
+            NSAssert([self.dataSource respondsToSelector:@selector(floatAudioSamplesWithLength:offsetInSamples:)], @"If using float audio format, the data source must implement the floatAudioSamplesWithLength:offsetInSamples:samples: method");
         }
-        
-        _buffers = [[NSMutableArray alloc] init];
         
         size_t totalSamples = [self.dataSource totalSamples];
         NSUInteger sampleRate = [self.audioFormat audioSampleRate];
@@ -49,17 +47,19 @@
 }
 
 -(void)dealloc {
-    //TODO: make sure everything is released!
+    [self tearDownAudio];
 }
 
 
 #pragma mark - Public Methods
 -(void)play {
+    [self setupAudioSession:AVAudioSessionCategoryPlayback];
     [self startQueue];
 }
 
 -(void)stop {
     [self stopQueue];
+    [self tearDownAudioSession];
     playbackPosition = 0;
 }
 
@@ -83,7 +83,6 @@
 
 #pragma mark - Setup Audio
 -(void)setupAudio {
-    [self setupAudioSession];
     [self setupAudioQueue];
 }
 
@@ -115,16 +114,16 @@
 
 -(void)setupBuffers {
     OSStatus err;
-    unsigned long bufferByteSize = [self.audioFormat audioSampleRate] * 0.25f;
+    UInt32 bufferByteSize = [self appropriateBufferSize];
     for(int x = 0; x < 2; x++) {
         AudioQueueBufferRef bufferRef;
-        err = AudioQueueAllocateBuffer(playQueue, (int)bufferByteSize, &bufferRef);
+        err = AudioQueueAllocateBuffer(playQueue, bufferByteSize, &bufferRef);
         if (err == noErr) {
             [self.buffers addObject:[NSValue valueWithPointer:bufferRef]];
             
             [self writeAudioToBuffer:bufferRef];
             
-            err = AudioQueueEnqueueBuffer (playQueue, bufferRef, 0, nil);
+            err = AudioQueueEnqueueBuffer (playQueue, bufferRef, 0, NULL);
             if (err != noErr) {
                 NSLog(@"Failed to enqueue data to audio buffer (error: %@)", [NSString OSStatusToString:err]);
             }
@@ -137,6 +136,10 @@
 
 
 #pragma mark - Tear down
+-(void)tearDownAudio {
+    //TODO: complete tearing down audio
+}
+
 -(void)tearDownBuffers {
     if(playQueue) {
         for(NSValue* value in self.buffers) {
@@ -170,7 +173,7 @@
 
 -(void)stopQueue {
     if(playQueue && _playing) {
-        OSStatus err = AudioQueueStop(playQueue, FALSE);
+        OSStatus err = AudioQueueStop(playQueue, TRUE);
         if (err != noErr) {
             NSLog(@"Failed to stop audio queue %@", [NSString OSStatusToString:err]);
         } else {
@@ -194,9 +197,8 @@
             if(length > remaining) {
                 length = remaining;
             }
-            SInt16* b;
-            [self.dataSource int16AudioSamplesWithLength:length offsetInSamples:playbackPosition samples:&b];
-            buffer = (void*)b;
+            NSData* data = [self.dataSource int16AudioSamplesWithLength:length offsetInSamples:playbackPosition];
+            buffer = (void*)[data bytes];
             sizeOfElement = sizeof(SInt16);
         } else {
             length = audioQueueBuffer->mAudioDataBytesCapacity / sizeof(float);
@@ -204,9 +206,8 @@
             if(length > remaining) {
                 length = remaining;
             }
-            float* b;
-            [self.dataSource floatAudioSamplesWithLength:length offsetInSamples:playbackPosition samples:&b];
-            buffer = (void*)b;
+            NSData* data = [self.dataSource floatAudioSamplesWithLength:length offsetInSamples:playbackPosition];
+            buffer = (void*)[data bytes];
             sizeOfElement = sizeof(float);
         }
         
@@ -214,13 +215,13 @@
         size_t bytesLength = length * sizeOfElement;
         memcpy(audioData, buffer, bytesLength);
         
-        audioQueueBuffer->mAudioDataByteSize = bytesLength;
+        audioQueueBuffer->mAudioDataByteSize = (UInt32)bytesLength;
         
         playbackPosition += length;
     } else {
         void* audioData = audioQueueBuffer->mAudioData;
         size_t length = audioQueueBuffer->mAudioDataBytesCapacity;
-        memset(audioData, NULL, length);
+        memset(audioData, 0, length);
         audioQueueBuffer->mAudioDataByteSize = 0;
     }
 }
@@ -269,59 +270,6 @@ void processingTapCallback(void * inClientData, AudioQueueProcessingTapRef inAQT
     [self handlePlaybackFinished];
 }
 
-
-#pragma mark - Audio Stream Description
--(AudioStreamBasicDescription)audioStreamDescription {
-    AudioStreamBasicDescription streamFormat;
-    streamFormat.mSampleRate = (Float64)[self.audioFormat audioSampleRate];
-    streamFormat.mFormatID = kAudioFormatLinearPCM;
-    streamFormat.mFormatFlags = [self audioFormatFlags];
-    streamFormat.mBitsPerChannel = [self bitsPerChannel];
-    streamFormat.mChannelsPerFrame = [self channelsPerFrame];
-    streamFormat.mBytesPerPacket = ([self bitsPerChannel] / 8) * streamFormat.mChannelsPerFrame;
-    streamFormat.mBytesPerFrame = ([self bitsPerChannel] / 8) * streamFormat.mChannelsPerFrame;
-    streamFormat.mFramesPerPacket = 1;
-    streamFormat.mReserved = 0;
-    return streamFormat;
-}
-
--(UInt32)bitsPerChannel {
-    return (UInt32)[self.audioFormat audioFormatType];
-}
-
--(UInt32)channelsPerFrame {
-    return (UInt32)[self.audioFormat audioChannelCount];
-}
-
--(AudioFormatFlags)audioFormatFlags {
-    if([self.audioFormat audioFormatType] == CinchAudioFormatType16BitShort) {
-        return kAudioFormatFlagIsSignedInteger;
-    }
-    return kLinearPCMFormatFlagIsFloat;
-}
-
-
-#pragma mark - AVAudioSession Setup
--(void)setupAudioSession {
-    NSError* error = nil;
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
-    if(error) {
-        NSLog(@"Failed to set category playback on avaudiosssion %@", error);
-        error = nil;
-    }
-    
-    [[AVAudioSession sharedInstance] setActive:YES error:&error];
-    if(error) {
-        NSLog(@"Failed to setactive on avaudiosssion %@", error);
-        error = nil;
-    }
-    
-    [[AVAudioSession sharedInstance] setPreferredSampleRate:[self.audioFormat audioSampleRate] error:&error];
-    if(error) {
-        NSLog(@"Failed to set preferred sample rate on avaudiosssion %@", error);
-        error = nil;
-    }
-}
 
 
 #pragma mark - C Helper Functions

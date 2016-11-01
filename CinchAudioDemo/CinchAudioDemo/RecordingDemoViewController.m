@@ -7,8 +7,15 @@
 //
 
 #import "RecordingDemoViewController.h"
+#import <CinchAudio/CinchAudio.h>
+#import "RecordingVisualiserView.h"
+@import AVFoundation;
 
-@interface RecordingDemoViewController ()
+@interface RecordingDemoViewController ()<CinchAudioRecorderDataHandler, CinchAudioFormat> {
+    CinchAudioRecorder* audioRecorder;
+}
+
+@property (weak, nonatomic) IBOutlet RecordingVisualiserView* renderingView;
 
 @end
 
@@ -16,22 +23,91 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    audioRecorder = [[CinchAudioRecorder alloc] initWithDataHandler:self audioFormat:self];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.renderingView start];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.renderingView stop];
+    [self.renderingView clear];
 }
-*/
+
+-(IBAction)startRecording:(id)sender {
+    void(^microphonePermissionsCallback)(BOOL) = ^(BOOL granted) {
+        //This should really call to a weak version of self, but since this view controller is never deallocated, it doesn't matter.
+        if(granted) {
+            [audioRecorder startRecording];
+        } else {
+            [self showMicrophonePermissionsDenied];
+        }
+    };
+    
+    AVAudioSessionRecordPermission permission = [[AVAudioSession sharedInstance] recordPermission];
+    switch(permission) {
+        case AVAudioSessionRecordPermissionDenied:
+            [self showMicrophonePermissionsDenied];
+            break;
+            
+        case AVAudioSessionRecordPermissionGranted:
+            microphonePermissionsCallback(TRUE);
+            break;
+            
+        case AVAudioSessionRecordPermissionUndetermined:
+            [[AVAudioSession sharedInstance] requestRecordPermission:microphonePermissionsCallback];
+            break;
+    }
+}
+
+-(IBAction)stopRecording:(id)sender {
+    [audioRecorder stopRecording];
+    [self.renderingView clear];
+}
+
+#pragma mark - Helpers
+-(void)showMicrophonePermissionsDenied {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:@"Microphone permissions have been denied. Please enable permissions in Settings to continue."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - Audio Format
+-(CinchAudioFormatType)audioFormatType {
+    return CinchAudioFormatType32BitFloat;
+}
+
+-(CinchAudioSampleRate)audioSampleRate {
+    return CinchAudioSampleRate44100Hz;
+}
+
+-(CinchAudioChannelCount)audioChannelCount {
+    return CinchAudioMono;
+}
+
+#pragma mark - Recording Data Handler
+-(void)cinchAudioRecorder:(CinchAudioRecorder *)cinchAudioRecorder didReceiveFloatData:(NSData *)data {
+    //Downsample to 1/40th of the original rate
+    size_t len = data.length / sizeof(float);
+    float* arr = (float*)[data bytes];
+    NSMutableArray<NSNumber*>* arrOutput = [[NSMutableArray alloc] init];
+    for(int x = 0; x < len; x++) {
+        if(x % 20 == 0) {
+            [arrOutput addObject:@(arr[x])];
+        }
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.renderingView addFloats:arrOutput];
+    });
+}
 
 @end

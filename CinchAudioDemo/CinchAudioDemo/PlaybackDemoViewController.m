@@ -12,8 +12,7 @@
 @interface PlaybackDemoViewController () <CinchAudioDataSource, CinchAudioFormat> {
     CinchAudioPlayer* audioPlayer;
     CinchAudioSampleRate sampleRate;
-    size_t sineWaveLength;
-    SInt16* sineWave;
+    NSMutableData* sineWave;
 }
 
 @end
@@ -24,12 +23,13 @@
     [super viewDidLoad];
    
     sampleRate = CinchAudioSampleRate48Khz;
-    sineWaveLength = sampleRate * 20;
+    long long sineWaveLength = sampleRate * 20;
     float frequency = 1600.f;
-    sineWave = malloc(sizeof(SInt16) * sineWaveLength);
+    sineWave = [[NSMutableData alloc] init];
     for(long x = 0; x < sineWaveLength; x++) {
         float value = sin(((frequency * M_PI_2 * (float)x) / (float)sampleRate));
-        sineWave[x] = (SInt16)(value * 32767.f);
+        SInt16 v = (SInt16)(value * 32767.f);
+        [sineWave appendPCMInt16:v];
     }
     
     audioPlayer = [[CinchAudioPlayer alloc] initWithDataSource:self audioFormat:self];
@@ -47,17 +47,12 @@
     return CinchAudioMono;
 }
 
--(size_t)totalSamples {
-    return sineWaveLength;
+-(NSInteger)totalSamples {
+    return [sineWave PCMInt16Length];
 }
 
--(void)int16AudioSamplesWithLength:(size_t)length offsetInSamples:(size_t)offsetInSamples samples:(SInt16 **)samples {
-    SInt16 audioData[length];
-    for(int i = 0; i < length; i++) {
-        audioData[i] = sineWave[offsetInSamples + i];
-    }
-    
-    *samples = audioData;
+-(NSData*)int16AudioSamplesWithLength:(NSInteger)length offsetInSamples:(NSInteger)offsetInSamples {
+    return [sineWave pcmInt16SubDataWithSamplesRange:NSMakeRange(offsetInSamples, length)];
 }
 
 #pragma mark - Actions

@@ -19,3 +19,5 @@ FOUNDATION_EXPORT const unsigned char CinchAudioVersionString[];
 #import "CinchAudioPlayer.h"
 #import "CinchAudioDataSource.h"
 #import "CinchAudioFormat.h"
+#import "NSData+PCM.h"
+#import "NSMutableData+PCM.h"

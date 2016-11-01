@@ -20,6 +20,7 @@
 		EAE8D5201DC74BAE003F241F /* RecordingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE8D51F1DC74BAE003F241F /* RecordingDemoViewController.m */; };
 		EAE8D5221DC75F14003F241F /* test.wav in Resources */ = {isa = PBXBuildFile; fileRef = EAE8D5211DC75F14003F241F /* test.wav */; };
 		EAE8D5241DC777B0003F241F /* fake_pairing_message.wav in Resources */ = {isa = PBXBuildFile; fileRef = EAE8D5231DC777B0003F241F /* fake_pairing_message.wav */; };
+		EAE8D5471DC8F89D003F241F /* RecordingVisualiserView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE8D5461DC8F89D003F241F /* RecordingVisualiserView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		EAE8D51F1DC74BAE003F241F /* RecordingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordingDemoViewController.m; sourceTree = "<group>"; };
 		EAE8D5211DC75F14003F241F /* test.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = test.wav; sourceTree = "<group>"; };
 		EAE8D5231DC777B0003F241F /* fake_pairing_message.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fake_pairing_message.wav; sourceTree = "<group>"; };
+		EAE8D5451DC8F89C003F241F /* RecordingVisualiserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingVisualiserView.h; sourceTree = "<group>"; };
+		EAE8D5461DC8F89D003F241F /* RecordingVisualiserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordingVisualiserView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 				EAE8D51E1DC74BAE003F241F /* RecordingDemoViewController.h */,
 				EAE8D51F1DC74BAE003F241F /* RecordingDemoViewController.m */,
 				EA15A31F1DC3EB2B0054262D /* Main.storyboard */,
+				EAE8D5451DC8F89C003F241F /* RecordingVisualiserView.h */,
+				EAE8D5461DC8F89D003F241F /* RecordingVisualiserView.m */,
 				EA15A3221DC3EB2B0054262D /* Assets.xcassets */,
 				EA15A3241DC3EB2B0054262D /* LaunchScreen.storyboard */,
 				EA15A3271DC3EB2B0054262D /* Info.plist */,
@@ -251,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE8D5471DC8F89D003F241F /* RecordingVisualiserView.m in Sources */,
 				EAE8D51D1DC74B9D003F241F /* PlaybackDemoViewController.m in Sources */,
 				EAE8D5201DC74BAE003F241F /* RecordingDemoViewController.m in Sources */,
 				EA15A31B1DC3EB2B0054262D /* AppDelegate.m in Sources */,

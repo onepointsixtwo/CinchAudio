@@ -58,13 +58,53 @@
                     <view key="view" contentMode="scaleToFill" id="eVd-dN-FPQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gff-K9-PWj">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="104" id="XDq-mF-gYt"/>
+                                    <constraint firstAttribute="height" constant="30" id="rFk-Tz-rGV"/>
+                                </constraints>
+                                <state key="normal" title="Start recording"/>
+                                <connections>
+                                    <action selector="startRecording:" destination="Enn-hv-wef" eventType="touchUpInside" id="wPB-aA-p0K"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZU-jc-RBL" customClass="RecordingVisualiserView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hn-T8-T1Z">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="104" id="LTT-Vi-3PQ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="aAq-zF-LmN"/>
+                                    <constraint firstAttribute="height" constant="30" id="lVr-6x-cpi"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="102" id="tSx-cV-bad"/>
+                                </constraints>
+                                <state key="normal" title="Stop recording"/>
+                                <connections>
+                                    <action selector="stopRecording:" destination="Enn-hv-wef" eventType="touchUpInside" id="R8t-j3-fPF"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gff-K9-PWj" firstAttribute="top" secondItem="xtF-Tc-Fpa" secondAttribute="bottom" constant="26" id="Bzd-a9-DWQ"/>
+                            <constraint firstItem="sZU-jc-RBL" firstAttribute="leading" secondItem="eVd-dN-FPQ" secondAttribute="leading" id="Don-Ul-ejw"/>
+                            <constraint firstItem="qXL-hP-BAI" firstAttribute="top" secondItem="sZU-jc-RBL" secondAttribute="bottom" id="NoY-9b-DeV"/>
+                            <constraint firstItem="gff-K9-PWj" firstAttribute="centerX" secondItem="eVd-dN-FPQ" secondAttribute="centerX" id="ZCn-3D-Yft"/>
+                            <constraint firstItem="sZU-jc-RBL" firstAttribute="top" secondItem="gff-K9-PWj" secondAttribute="bottom" constant="50" id="a64-9G-7iE"/>
+                            <constraint firstItem="1hn-T8-T1Z" firstAttribute="centerX" secondItem="eVd-dN-FPQ" secondAttribute="centerX" id="bTH-R1-Zm2"/>
+                            <constraint firstAttribute="trailing" secondItem="sZU-jc-RBL" secondAttribute="trailing" id="oml-IV-VvH"/>
+                            <constraint firstItem="1hn-T8-T1Z" firstAttribute="top" secondItem="gff-K9-PWj" secondAttribute="bottom" constant="8" id="vel-j0-D1B"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Record Audio" image="record-icon.png" selectedImage="record-icon.png" id="84h-mr-02f"/>
+                    <connections>
+                        <outlet property="renderingView" destination="sZU-jc-RBL" id="9B8-W0-2AZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dq5-PE-kQH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="271" y="-203"/>
+            <point key="canvasLocation" x="269.60000000000002" y="-203.74812593703149"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Boh-Ff-3dl">
