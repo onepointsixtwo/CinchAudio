@@ -13,7 +13,7 @@
 @interface CinchAudioPlayer () {
     AudioQueueRef playQueue;
     AudioQueueProcessingTapRef audioQueueProcessingTap;
-    long playbackPosition;
+    unsigned long playbackPosition;
     NSTimer* endingTimer;
 }
 
@@ -153,7 +153,7 @@
 -(void)startQueue {
     if(playQueue && !_playing) {
         [self setupBuffers];
-        OSStatus err = AudioQueueStart(playQueue, nil);
+        OSStatus err = AudioQueueStart(playQueue, NULL);
         if (err != noErr) {
             NSLog(@"Failed to start audio queue %@", [NSString OSStatusToString:err]);
         } else {
@@ -164,7 +164,7 @@
 
 -(void)stopQueue {
     if(playQueue && _playing) {
-        OSStatus err = AudioQueueStop(playQueue, nil);
+        OSStatus err = AudioQueueStop(playQueue, FALSE);
         if (err != noErr) {
             NSLog(@"Failed to stop audio queue %@", [NSString OSStatusToString:err]);
         } else {
@@ -184,19 +184,23 @@
         
         if([self.audioFormat audioFormatType] == CinchAudioFormatType16BitShort) {
             length = audioQueueBuffer->mAudioDataBytesCapacity / sizeof(SInt16);
-            int remaining = [self.dataSource totalSamples] - playbackPosition;
+            unsigned long remaining = [self.dataSource totalSamples] - playbackPosition;
             if(length > remaining) {
                 length = remaining;
             }
-            [self.dataSource int16AudioSamplesWithLength:length offsetInSamples:playbackPosition samples:&buffer];
+            SInt16* b;
+            [self.dataSource int16AudioSamplesWithLength:length offsetInSamples:playbackPosition samples:&b];
+            buffer = (void*)b;
             sizeOfElement = sizeof(SInt16);
         } else {
             length = audioQueueBuffer->mAudioDataBytesCapacity / sizeof(float);
-            int remaining = [self.dataSource totalSamples] - playbackPosition;
+            unsigned long remaining = [self.dataSource totalSamples] - playbackPosition;
             if(length > remaining) {
                 length = remaining;
             }
-            [self.dataSource floatAudioSamplesWithLength:length offsetInSamples:playbackPosition samples:&buffer];
+            float* b;
+            [self.dataSource floatAudioSamplesWithLength:length offsetInSamples:playbackPosition samples:&b];
+            buffer = (void*)b;
             sizeOfElement = sizeof(float);
         }
         
