@@ -29,6 +29,12 @@
         _dataSource = dataSource;
         _audioFormat = audioFormat;
         
+        if([self.audioFormat audioFormatType] == CinchAudioFormatType16BitShort) {
+            NSAssert([self.dataSource respondsToSelector:@selector(int16AudioSamplesWithLength:offsetInSamples:samples:)], @"If using 16 bit short audio format, the data source must implement the int16AudioSamplesWithLength:offsetInSamples:samples: method");
+        } else if([self.audioFormat audioFormatType] == CinchAudioFormatType32BitFloat) {
+            NSAssert([self.dataSource respondsToSelector:@selector(floatAudioSamplesWithLength:offsetInSamples:samples:)], @"If using float audio format, the data source must implement the floatAudioSamplesWithLength:offsetInSamples:samples: method");
+        }
+        
         _buffers = [[NSMutableArray alloc] init];
         
         size_t totalSamples = [self.dataSource totalSamples];
