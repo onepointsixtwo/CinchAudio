@@ -19,6 +19,11 @@
 		EA15A3731DC3F5320054262D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA15A3721DC3F5320054262D /* AudioToolbox.framework */; };
 		EA15A3751DC504980054262D /* CinchAudioDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15A3741DC504740054262D /* CinchAudioDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA15A3781DC5057B0054262D /* CinchAudioFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15A3771DC505600054262D /* CinchAudioFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA15A37C1DC523B60054262D /* NSString+OSStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15A37A1DC523B60054262D /* NSString+OSStatus.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		EA15A37D1DC523B60054262D /* NSString+OSStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = EA15A37B1DC523B60054262D /* NSString+OSStatus.m */; };
+		EAE8D5321DC79E2C003F241F /* CinchAudio.podspec in Resources */ = {isa = PBXBuildFile; fileRef = EAE8D52F1DC79E2C003F241F /* CinchAudio.podspec */; };
+		EAE8D5331DC79E2C003F241F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EAE8D5301DC79E2C003F241F /* LICENSE */; };
+		EAE8D5341DC79E2C003F241F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = EAE8D5311DC79E2C003F241F /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +50,11 @@
 		EA15A3721DC3F5320054262D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		EA15A3741DC504740054262D /* CinchAudioDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CinchAudioDataSource.h; sourceTree = "<group>"; };
 		EA15A3771DC505600054262D /* CinchAudioFormat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CinchAudioFormat.h; sourceTree = "<group>"; };
+		EA15A37A1DC523B60054262D /* NSString+OSStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+OSStatus.h"; sourceTree = "<group>"; };
+		EA15A37B1DC523B60054262D /* NSString+OSStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+OSStatus.m"; sourceTree = "<group>"; };
+		EAE8D52F1DC79E2C003F241F /* CinchAudio.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CinchAudio.podspec; path = ../../CinchAudio.podspec; sourceTree = "<group>"; };
+		EAE8D5301DC79E2C003F241F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
+		EAE8D5311DC79E2C003F241F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,9 +99,8 @@
 		EA15A3391DC3EB500054262D /* CinchAudio */ = {
 			isa = PBXGroup;
 			children = (
-				EA15A3761DC504CB0054262D /* Protocols */,
-				EA15A35B1DC3EB9E0054262D /* Recorder */,
-				EA15A35A1DC3EB950054262D /* Player */,
+				EAE8D5271DC79D24003F241F /* Pod metadata */,
+				EAE8D5261DC79D11003F241F /* Classes */,
 				EA15A33A1DC3EB500054262D /* CinchAudio.h */,
 				EA15A33B1DC3EB500054262D /* Info.plist */,
 			);
@@ -142,6 +151,36 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
+		EA15A3791DC523960054262D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				EA15A37A1DC523B60054262D /* NSString+OSStatus.h */,
+				EA15A37B1DC523B60054262D /* NSString+OSStatus.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		EAE8D5261DC79D11003F241F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EA15A3791DC523960054262D /* Categories */,
+				EA15A3761DC504CB0054262D /* Protocols */,
+				EA15A35B1DC3EB9E0054262D /* Recorder */,
+				EA15A35A1DC3EB950054262D /* Player */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		EAE8D5271DC79D24003F241F /* Pod metadata */ = {
+			isa = PBXGroup;
+			children = (
+				EAE8D52F1DC79E2C003F241F /* CinchAudio.podspec */,
+				EAE8D5301DC79E2C003F241F /* LICENSE */,
+				EAE8D5311DC79E2C003F241F /* README.md */,
+			);
+			name = "Pod metadata";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -153,6 +192,7 @@
 				EA15A3641DC3EBCF0054262D /* CinchAudioRecorder.h in Headers */,
 				EA15A3751DC504980054262D /* CinchAudioDataSource.h in Headers */,
 				EA15A3481DC3EB500054262D /* CinchAudio.h in Headers */,
+				EA15A37C1DC523B60054262D /* NSString+OSStatus.h in Headers */,
 				EA15A3781DC5057B0054262D /* CinchAudioFormat.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +280,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE8D5331DC79E2C003F241F /* LICENSE in Resources */,
+				EAE8D5321DC79E2C003F241F /* CinchAudio.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +300,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA15A3651DC3EBCF0054262D /* CinchAudioRecorder.m in Sources */,
+				EA15A37D1DC523B60054262D /* NSString+OSStatus.m in Sources */,
+				EAE8D5341DC79E2C003F241F /* README.md in Sources */,
 				EA15A3601DC3EBBF0054262D /* CinchAudioPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

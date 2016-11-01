@@ -1,26 +1,92 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DAK-QV-3gy">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Play Audio-->
+        <scene sceneID="tVe-Ug-hWf">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="tWl-hS-Us3" customClass="PlaybackDemoViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="a2n-E7-m5e"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZFL-aF-TmN"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="BM0-eZ-2Wh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTy-eZ-hcC">
+                                <state key="normal" title="Play Audio"/>
+                                <connections>
+                                    <action selector="play:" destination="tWl-hS-Us3" eventType="touchUpInside" id="mEo-hz-oyn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32j-Lb-A8t">
+                                <state key="normal" title="Stop Audio"/>
+                                <connections>
+                                    <action selector="stop:" destination="tWl-hS-Us3" eventType="touchUpInside" id="CMZ-dv-6ui"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="32j-Lb-A8t" firstAttribute="centerY" secondItem="BM0-eZ-2Wh" secondAttribute="centerY" id="0lh-Hq-fVl"/>
+                            <constraint firstItem="eTy-eZ-hcC" firstAttribute="centerY" secondItem="BM0-eZ-2Wh" secondAttribute="centerY" id="9dc-Ke-VDE"/>
+                            <constraint firstItem="32j-Lb-A8t" firstAttribute="width" secondItem="eTy-eZ-hcC" secondAttribute="width" id="UH7-4E-G6a"/>
+                            <constraint firstItem="32j-Lb-A8t" firstAttribute="leading" secondItem="eTy-eZ-hcC" secondAttribute="trailing" constant="56" id="VUC-f9-Q8J"/>
+                            <constraint firstItem="eTy-eZ-hcC" firstAttribute="centerX" secondItem="BM0-eZ-2Wh" secondAttribute="centerX" constant="-70.5" id="hJw-xf-zN1"/>
+                            <constraint firstItem="32j-Lb-A8t" firstAttribute="leading" secondItem="eTy-eZ-hcC" secondAttribute="trailing" constant="56" id="hpI-aq-sDt"/>
+                        </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Play Audio" image="play-icon.png" selectedImage="play-icon.png" id="2dc-BJ-shv"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Vo-54-Idl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="271" y="452"/>
+        </scene>
+        <!--Record Audio-->
+        <scene sceneID="E4s-j8-uGu">
+            <objects>
+                <viewController id="Enn-hv-wef" customClass="RecordingDemoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xtF-Tc-Fpa"/>
+                        <viewControllerLayoutGuide type="bottom" id="qXL-hP-BAI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eVd-dN-FPQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Record Audio" image="record-icon.png" selectedImage="record-icon.png" id="84h-mr-02f"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dq5-PE-kQH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="271" y="-203"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Boh-Ff-3dl">
+            <objects>
+                <tabBarController id="DAK-QV-3gy" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="DaY-xR-vxU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Enn-hv-wef" kind="relationship" relationship="viewControllers" id="PoO-VC-e0A"/>
+                        <segue destination="tWl-hS-Us3" kind="relationship" relationship="viewControllers" id="Byw-xj-u8e"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XhM-qV-llZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-681" y="125"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="play-icon.png" width="20" height="20"/>
+        <image name="record-icon.png" width="20" height="20"/>
+    </resources>
 </document>

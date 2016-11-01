@@ -11,8 +11,8 @@
 
 typedef NS_ENUM(NSUInteger, CinchAudioFormatType)
 {
-    CinchAudioFormatType32BitFloat,
-    CinchAudioFormatType16BitShort,
+    CinchAudioFormatType32BitFloat = 32,
+    CinchAudioFormatType16BitShort = 16,
 };
 
 typedef NS_ENUM(NSUInteger, CinchAudioSampleRate)
@@ -25,8 +25,8 @@ typedef NS_ENUM(NSUInteger, CinchAudioSampleRate)
 typedef NS_ENUM(NSUInteger, CinchAudioChannelCount)
 {
     //TODO: add support for more audio channel types?
-    CinchAudioMono,
-    CinchAudioStereo,
+    CinchAudioMono = 1,
+    CinchAudioStereo = 2,
 };
 
 @protocol CinchAudioFormat <NSObject>

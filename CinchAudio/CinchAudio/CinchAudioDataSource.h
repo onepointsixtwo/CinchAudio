@@ -11,11 +11,11 @@
 
 @protocol CinchAudioDataSource <NSObject>
 
--(size_t)totalCount;
+-(size_t)totalSamples;
 
 @optional
--(void)provideFloatAudioData:(float**)audioData count:(size_t*)count offset:(size_t)offset;
--(void)provide16BitAudioData:(int16_t**)audioData count:(size_t*)count offset:(size_t)offset;
+-(void)floatAudioSamplesWithLength:(size_t)length offsetInSamples:(size_t)offsetInSamples samples:(float**)samples;
+-(void)int16AudioSamplesWithLength:(size_t)length offsetInSamples:(size_t)offsetInSamples samples:(SInt16**)samples;
 
 @end
 

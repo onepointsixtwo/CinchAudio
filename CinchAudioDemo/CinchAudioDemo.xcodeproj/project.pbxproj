@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		EA15A3181DC3EB2B0054262D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA15A3171DC3EB2B0054262D /* main.m */; };
 		EA15A31B1DC3EB2B0054262D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA15A31A1DC3EB2B0054262D /* AppDelegate.m */; };
-		EA15A31E1DC3EB2B0054262D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA15A31D1DC3EB2B0054262D /* ViewController.m */; };
 		EA15A3211DC3EB2B0054262D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA15A31F1DC3EB2B0054262D /* Main.storyboard */; };
 		EA15A3231DC3EB2B0054262D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA15A3221DC3EB2B0054262D /* Assets.xcassets */; };
 		EA15A3261DC3EB2B0054262D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA15A3241DC3EB2B0054262D /* LaunchScreen.storyboard */; };
 		EA15A3571DC3EB870054262D /* CinchAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA15A3521DC3EB730054262D /* CinchAudio.framework */; };
 		EA15A3581DC3EB870054262D /* CinchAudio.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EA15A3521DC3EB730054262D /* CinchAudio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EAE8D5191DC74A37003F241F /* play-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAE8D5171DC74A37003F241F /* play-icon@2x.png */; };
+		EAE8D51A1DC74A37003F241F /* record-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAE8D5181DC74A37003F241F /* record-icon@2x.png */; };
+		EAE8D51D1DC74B9D003F241F /* PlaybackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE8D51C1DC74B9D003F241F /* PlaybackDemoViewController.m */; };
+		EAE8D5201DC74BAE003F241F /* RecordingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE8D51F1DC74BAE003F241F /* RecordingDemoViewController.m */; };
+		EAE8D5221DC75F14003F241F /* test.wav in Resources */ = {isa = PBXBuildFile; fileRef = EAE8D5211DC75F14003F241F /* test.wav */; };
+		EAE8D5241DC777B0003F241F /* fake_pairing_message.wav in Resources */ = {isa = PBXBuildFile; fileRef = EAE8D5231DC777B0003F241F /* fake_pairing_message.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,14 +58,20 @@
 		EA15A3171DC3EB2B0054262D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EA15A3191DC3EB2B0054262D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EA15A31A1DC3EB2B0054262D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EA15A31C1DC3EB2B0054262D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EA15A31D1DC3EB2B0054262D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EA15A3201DC3EB2B0054262D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EA15A3221DC3EB2B0054262D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA15A3251DC3EB2B0054262D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA15A3271DC3EB2B0054262D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA15A3521DC3EB730054262D /* CinchAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CinchAudio.framework; path = "../../../../Library/Developer/Xcode/DerivedData/CinchAudio-blgewokxjrfhuycftfrftczlodzx/Build/Products/Debug-iphoneos/CinchAudio.framework"; sourceTree = "<group>"; };
 		EA15A3671DC3EC9C0054262D /* CinchAudio.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CinchAudio.xcodeproj; path = ../CinchAudio/CinchAudio.xcodeproj; sourceTree = "<group>"; };
+		EAE8D5171DC74A37003F241F /* play-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-icon@2x.png"; sourceTree = "<group>"; };
+		EAE8D5181DC74A37003F241F /* record-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record-icon@2x.png"; sourceTree = "<group>"; };
+		EAE8D51B1DC74B9D003F241F /* PlaybackDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackDemoViewController.h; sourceTree = "<group>"; };
+		EAE8D51C1DC74B9D003F241F /* PlaybackDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackDemoViewController.m; sourceTree = "<group>"; };
+		EAE8D51E1DC74BAE003F241F /* RecordingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingDemoViewController.h; sourceTree = "<group>"; };
+		EAE8D51F1DC74BAE003F241F /* RecordingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordingDemoViewController.m; sourceTree = "<group>"; };
+		EAE8D5211DC75F14003F241F /* test.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = test.wav; sourceTree = "<group>"; };
+		EAE8D5231DC777B0003F241F /* fake_pairing_message.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fake_pairing_message.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +109,10 @@
 			children = (
 				EA15A3191DC3EB2B0054262D /* AppDelegate.h */,
 				EA15A31A1DC3EB2B0054262D /* AppDelegate.m */,
-				EA15A31C1DC3EB2B0054262D /* ViewController.h */,
-				EA15A31D1DC3EB2B0054262D /* ViewController.m */,
+				EAE8D51B1DC74B9D003F241F /* PlaybackDemoViewController.h */,
+				EAE8D51C1DC74B9D003F241F /* PlaybackDemoViewController.m */,
+				EAE8D51E1DC74BAE003F241F /* RecordingDemoViewController.h */,
+				EAE8D51F1DC74BAE003F241F /* RecordingDemoViewController.m */,
 				EA15A31F1DC3EB2B0054262D /* Main.storyboard */,
 				EA15A3221DC3EB2B0054262D /* Assets.xcassets */,
 				EA15A3241DC3EB2B0054262D /* LaunchScreen.storyboard */,
@@ -112,6 +125,10 @@
 		EA15A3161DC3EB2B0054262D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EAE8D5211DC75F14003F241F /* test.wav */,
+				EAE8D5231DC777B0003F241F /* fake_pairing_message.wav */,
+				EAE8D5171DC74A37003F241F /* play-icon@2x.png */,
+				EAE8D5181DC74A37003F241F /* record-icon@2x.png */,
 				EA15A3171DC3EB2B0054262D /* main.m */,
 			);
 			name = "Supporting Files";
@@ -217,7 +234,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE8D5221DC75F14003F241F /* test.wav in Resources */,
+				EAE8D51A1DC74A37003F241F /* record-icon@2x.png in Resources */,
 				EA15A3261DC3EB2B0054262D /* LaunchScreen.storyboard in Resources */,
+				EAE8D5241DC777B0003F241F /* fake_pairing_message.wav in Resources */,
+				EAE8D5191DC74A37003F241F /* play-icon@2x.png in Resources */,
 				EA15A3231DC3EB2B0054262D /* Assets.xcassets in Resources */,
 				EA15A3211DC3EB2B0054262D /* Main.storyboard in Resources */,
 			);
@@ -230,7 +251,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA15A31E1DC3EB2B0054262D /* ViewController.m in Sources */,
+				EAE8D51D1DC74B9D003F241F /* PlaybackDemoViewController.m in Sources */,
+				EAE8D5201DC74BAE003F241F /* RecordingDemoViewController.m in Sources */,
 				EA15A31B1DC3EB2B0054262D /* AppDelegate.m in Sources */,
 				EA15A3181DC3EB2B0054262D /* main.m in Sources */,
 			);
@@ -389,6 +411,7 @@
 				EA15A32C1DC3EB2B0054262D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

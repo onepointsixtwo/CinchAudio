@@ -17,3 +17,5 @@ FOUNDATION_EXPORT const unsigned char CinchAudioVersionString[];
 //Public Headers
 #import "CinchAudioRecorder.h"
 #import "CinchAudioPlayer.h"
+#import "CinchAudioDataSource.h"
+#import "CinchAudioFormat.h"
