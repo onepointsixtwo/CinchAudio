@@ -41,8 +41,8 @@ This is meant to be the easiest sound library you'll ever use for PCM audio. No 
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-s.license      = {:type => "MIT", :file => "LICENSE"}
-  # s.license      = { :type => "MIT", :file => "LICENSE" }
+s.license      = {:type => "APACHE", :file => "LICENSE"}
+  # s.license      = { :type => "APACHE", :file => "LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -55,7 +55,7 @@ s.license      = {:type => "MIT", :file => "LICENSE"}
   #  profile URL.
   #
 
-  s.author             = { "onepointsixtwo" => "email@address.com" }
+  s.author             = { "onepointsixtwo" => "john.kartupelis@gmail.com" }
   # Or just: s.author    = "onepointsixtwo"
   # s.authors            = { "onepointsixtwo" => "email@address.com" }
   # s.social_media_url   = "http://twitter.com/onepointsixtwo"
@@ -82,7 +82,7 @@ s.license      = {:type => "MIT", :file => "LICENSE"}
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/onepointsixtwo/CinchAudio.git", :commit => "14856cee71aadba15efb02483e4a0a50c2e7e600" }
+  s.source       = { :git => "https://github.com/onepointsixtwo/CinchAudio.git", :commit => "b944efacb733c658936478438cb8e800c3eb8063" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
