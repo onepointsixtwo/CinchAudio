@@ -10,4 +10,19 @@
 
 @implementation CinchAudioRecorder
 
+-(nonnull instancetype)initWithDataHandler:(nonnull id<CinchAudioRecorderDataHandler>)dataHandler audioFormat:(nonnull id<CinchAudioFormat>)audioFormat {
+    if(self = [super init]) {
+        
+    }
+    return self;
+}
+
+-(void)startRecording {
+    
+}
+
+-(void)stopRecording {
+    
+}
+
 @end
