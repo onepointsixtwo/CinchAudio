@@ -114,16 +114,31 @@
 
 #pragma mark - Tear Down Audio Recording
 -(void)tearDownAudioRecording {
-    //TODO: complete tear down
+    [self stopQueue];
+    [self dequeueBuffers];
+    [self releaseQueue];
 }
 
 -(void)dequeueBuffers {
     if(recordQueue) {
         for(NSValue* value in self.buffers) {
             AudioQueueBufferRef buffer = (AudioQueueBufferRef)value.pointerValue;
-            AudioQueueFreeBuffer(recordQueue, buffer);
+            OSStatus err = AudioQueueFreeBuffer(recordQueue, buffer);
+            if(err != noErr) {
+                NSLog(@"Failed to release buffer %@", [NSString OSStatusToString:err]);
+            }
         }
         [self.buffers removeAllObjects];
+    }
+}
+
+-(void)releaseQueue {
+    if(recordQueue) {
+        OSStatus err = AudioQueueDispose(recordQueue, TRUE);
+        if(err != noErr) {
+            NSLog(@"Failed to release audio queue %@", [NSString OSStatusToString:err]);
+        }
+        recordQueue = NULL;
     }
 }
 
@@ -133,8 +148,9 @@ void audioEngineInputBufferCallback(void *inUserData, AudioQueueRef inAQ, AudioQ
     [recorder handleAudioRecorderCallback:inBuffer];
     
     OSStatus err = AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, NULL);
-    if(err != noErr && err != -66632) {
+    if(err != noErr) {
         NSLog(@"AudioQueueEnqueueBuffer failed with error %@", [NSString OSStatusToString:err]);
+        AudioQueueFreeBuffer(inAQ, inBuffer);
     }
 }
 

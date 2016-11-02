@@ -137,7 +137,9 @@
 
 #pragma mark - Tear down
 -(void)tearDownAudio {
-    //TODO: complete tearing down audio
+    [self stopQueue];
+    [self tearDownBuffers];
+    [self releaseQueue];
 }
 
 -(void)tearDownBuffers {
@@ -147,6 +149,12 @@
             AudioQueueFreeBuffer(playQueue, buffer);
         }
         [self.buffers removeAllObjects];
+    }
+}
+
+-(void)releaseQueue {
+    if(playQueue) {
+        AudioQueueDispose(playQueue, TRUE);
     }
 }
 
