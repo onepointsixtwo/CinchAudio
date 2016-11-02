@@ -13,6 +13,7 @@
 
 @interface RecordingDemoViewController ()<CinchAudioRecorderDataHandler, CinchAudioFormat> {
     CinchAudioRecorder* audioRecorder;
+    BOOL shouldRender;
 }
 
 @property (weak, nonatomic) IBOutlet RecordingVisualiserView* renderingView;
@@ -34,6 +35,7 @@
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.renderingView stop];
+    shouldRender = FALSE;
     [self.renderingView clear];
 }
 
@@ -42,6 +44,7 @@
         //This should really call to a weak version of self, but since this view controller is never deallocated, it doesn't matter.
         if(granted) {
             [audioRecorder startRecording];
+            shouldRender = TRUE;
         } else {
             [self showMicrophonePermissionsDenied];
         }
@@ -65,6 +68,7 @@
 
 -(IBAction)stopRecording:(id)sender {
     [audioRecorder stopRecording];
+    shouldRender = FALSE;
     [self.renderingView clear];
 }
 
@@ -105,9 +109,14 @@
             [arrOutput addObject:@(arr[x])];
         }
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.renderingView addFloats:arrOutput];
-    });
+    
+    [self performSelectorOnMainThread:@selector(addFloats:) withObject:arrOutput waitUntilDone:FALSE];
+}
+
+-(IBAction)addFloats:(NSArray<NSNumber*>*)floats {
+    if(shouldRender) {
+        [self.renderingView addFloats:floats];
+    }
 }
 
 @end
