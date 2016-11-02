@@ -82,7 +82,7 @@ s.license      = {:type => "APACHE", :file => "LICENSE"}
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/onepointsixtwo/CinchAudio.git", :commit => "6bd2df990a1d4c96481cff540301fcde515c2226" }
+  s.source       = { :git => "https://github.com/onepointsixtwo/CinchAudio.git", :tag => "v0.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
